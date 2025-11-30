@@ -50,7 +50,7 @@ offvsix ms-python.python
 To download multiple extensions, you can use a text file where each line is an extension name:
 
 ```bash
-offvsix --file extensions.txt
+offvsix -f extensions.txt
 ```
 
 ### Install
