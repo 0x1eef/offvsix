@@ -34,3 +34,17 @@ func FindExtension(extensionID string) (*Extension, error) {
 	}
 	return &ver.Results[0].Extensions[0], nil
 }
+
+func (ext *Extension) DownloadURL() (string, error) {
+	var url string
+	ver := ext.Versions[0]
+	for _, f := range ver.Files {
+		if f.AssetType == "Microsoft.VisualStudio.Services.VSIXPackage" {
+			url = f.Source
+		}
+	}
+	if url == "" {
+		return url, fmt.Errorf("download URL not found")
+	}
+	return url, nil
+}
