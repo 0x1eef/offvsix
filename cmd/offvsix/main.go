@@ -16,21 +16,34 @@ var version string
 func main() {
 	args := flag.Args()
 	extid := args[0]
+	err := save(extid)
+	check(err)
+}
+
+func save(extid string) error {
 	fmt.Printf("offvsix: find extension %q\n", extid)
 	ext, err := gallery.FindExtension(extid)
-	check(err)
+	if err != nil {
+		return err
+	}
 	if version == "" {
 		version = ext.LatestVersion()
 	}
 	fmt.Printf("offvsix: download version %q\n", version)
 	r, err := asset.DownloadExtension(ext, version)
-	check(err)
+	if err != nil {
+		return err
+	}
 	b, err := io.ReadAll(r)
-	check(err)
+	if err != nil {
+		return err
+	}
 	fmt.Printf("offvsix: save extension to disk\n")
 	file := fmt.Sprintf("%s-%s.vsix", extid, version)
 	err = os.WriteFile(file, b, 0644)
-	check(err)
+	if err != nil {
+		return err
+	}
 	fmt.Printf("offvsix: extension saved to %q\n", file)
 }
 
