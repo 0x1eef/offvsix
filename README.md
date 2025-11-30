@@ -15,6 +15,14 @@ of the same name but this copy is rewritten in Go.
 
 ## Install
 
+#### Binaries
+
+Prebuilt binaries are made available via [GItHub actions](https://github.com/0x1eef/offvsix/actions/runs/19804438532):
+
+* [offvsix-windows-amd64 (v0.1.0)](https://github.com/0x1eef/offvsix/actions/runs/19804438532/artifacts/4718381404)
+* [offvsix-linux-amd64 (v0.1.0)](https://github.com/0x1eef/offvsix/actions/runs/19804438532/artifacts/4718379153)
+* [offvsix-darwin-amd64 (v0.1.0)](https://github.com/0x1eef/offvsix/actions/runs/19804438532/artifacts/4718379288)
+
 #### Package
 
     user@localhost$ go install github.com/0x1eef/offvsix/cmd/offvsix@latest
