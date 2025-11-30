@@ -15,8 +15,7 @@ var help bool
 func main() {
 	args := flag.Args()
 	if len(args) != 1 || help {
-		fmt.Println("Usage: offvsix [options] extension")
-		flag.PrintDefaults()
+		showHelp()
 		return
 	}
 	extid := args[0]
@@ -28,6 +27,11 @@ func main() {
 	check(err)
 	err = os.WriteFile(extid+".vsix", b, 0644)
 	check(err)
+}
+
+func showHelp() {
+	fmt.Println("Usage: offvsix [options] extension")
+	flag.PrintDefaults()
 }
 
 func check(err error) {
