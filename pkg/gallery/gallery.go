@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func FindExtension(extensionID string, version string) (*Extension, error) {
+func FindExtension(extensionID string) (*Extension, error) {
 	var ver Response
 	req, err := newRequest(extensionID)
 	if err != nil {
@@ -42,8 +42,9 @@ func (ext *Extension) DownloadURL(version string) string {
 	var (
 		scheme = "https"
 		host   = fmt.Sprintf("%s.gallery.vsassets.io", ext.Publisher.PublisherName)
-		path   = fmt.Sprintf("/_apis/public/gallery/publisher/%s/extension/%s/%s/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage", ext.Publisher.PublisherName, "go", version)
+		path   = fmt.Sprintf("/_apis/public/gallery/publisher/%s/extension/%s/%s/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage", ext.Publisher.PublisherName, ext.ExtensionName, version)
 	)
+
 	return fmt.Sprintf("%s://%s%s", scheme, host, path)
 }
 
