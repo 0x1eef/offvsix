@@ -13,7 +13,7 @@ of the same name but this copy is rewritten in Go.
 * Cross-platform support: Windows, macOS, Linux, and BSD
 * **Bulk download:** Supply a text file with a list of extensions to download them all at once!
 
-## Installation
+## Install
 
 You can install the binary using `go install`:
 
@@ -33,7 +33,7 @@ make build
 
 ## Usage
 
-### Basics
+#### Basics
 
 ```bash
 offvsix <publisher.extension>
@@ -45,7 +45,7 @@ For example:
 offvsix golang.go
 ```
 
-### Bulk
+#### Bulk
 
 To download multiple extensions, you can use a text file where each line is an extension name:
 
@@ -53,7 +53,7 @@ To download multiple extensions, you can use a text file where each line is an e
 offvsix -f extensions.txt
 ```
 
-### Install
+#### Install
 
 ```bash
 code-server --install-extension golang.go-0.51.1.vsix
