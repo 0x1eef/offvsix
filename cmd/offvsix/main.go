@@ -15,10 +15,6 @@ var version string
 
 func main() {
 	args := flag.Args()
-	if len(args) != 1 || help {
-		showHelp()
-		return
-	}
 	extid := args[0]
 	ext, err := gallery.FindExtension(extid)
 	check(err)
@@ -49,4 +45,12 @@ func init() {
 	flag.BoolVar(&help, "h", false, "Show help")
 	flag.StringVar(&version, "v", "", "Set extension version")
 	flag.Parse()
+
+	if len(flag.Args()) != 1 {
+		showHelp()
+		os.Exit(1)
+	} else if help {
+		showHelp()
+		os.Exit(0)
+	}
 }
