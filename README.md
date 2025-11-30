@@ -9,7 +9,7 @@ of the same name but this copy is rewritten in Go.
 ## Features
 
 * Download specific versions of VS Code extensions
-* **Bulk download:** Supply a text file with a list of extensions to download them all at once
+* Supply a text file with a list of extensions to download them all at once
 * Single binary with no dependencies
 * Cross-platform support: Windows, macOS, Linux, and BSD
 
