@@ -8,11 +8,9 @@ import (
 	"github.com/0x1eef/offvsix/pkg/gallery"
 )
 
-func DownloadExtension(ext *gallery.Extension) (io.Reader, error) {
-	endpoint, err := ext.DownloadURL()
-	if err != nil {
-		return nil, err
-	}
+func DownloadExtension(ext *gallery.Extension, version string) (io.Reader, error) {
+	endpoint := ext.DownloadURL(version)
+	fmt.Println(endpoint)
 	res, err := http.Get(endpoint)
 	if err != nil {
 		return nil, err

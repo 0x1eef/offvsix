@@ -11,21 +11,29 @@ import (
 )
 
 var help bool
+var version string
 
 func main() {
+	var v string
 	args := flag.Args()
 	if len(args) != 1 || help {
 		showHelp()
 		return
 	}
 	extid := args[0]
-	ext, err := gallery.FindExtension(extid)
+	ext, err := gallery.FindExtension(extid, version)
 	check(err)
-	r, err := asset.DownloadExtension(ext)
+	r, err := asset.DownloadExtension(ext, version)
 	check(err)
 	b, err := io.ReadAll(r)
 	check(err)
-	err = os.WriteFile(extid+".vsix", b, 0644)
+	if version == "" {
+		v = ext.LatestVersion()
+	} else {
+		v = version
+	}
+	file := fmt.Sprintf("%s-%s.vsix", extid, v)
+	err = os.WriteFile(file, b, 0644)
 	check(err)
 }
 
@@ -42,5 +50,6 @@ func check(err error) {
 
 func init() {
 	flag.BoolVar(&help, "h", false, "Show help")
+	flag.StringVar(&version, "v", "", "Set extension version")
 	flag.Parse()
 }

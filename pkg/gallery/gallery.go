@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func FindExtension(extensionID string) (*Extension, error) {
+func FindExtension(extensionID string, version string) (*Extension, error) {
 	var ver Response
 	req, err := newRequest(extensionID)
 	if err != nil {
@@ -35,16 +35,18 @@ func FindExtension(extensionID string) (*Extension, error) {
 	return &ver.Results[0].Extensions[0], nil
 }
 
-func (ext *Extension) DownloadURL() (string, error) {
-	var url string
-	ver := ext.Versions[0]
-	for _, f := range ver.Files {
-		if f.AssetType == "Microsoft.VisualStudio.Services.VSIXPackage" {
-			url = f.Source
-		}
+func (ext *Extension) DownloadURL(version string) string {
+	if version == "" {
+		version = ext.LatestVersion()
 	}
-	if url == "" {
-		return url, fmt.Errorf("download URL not found")
-	}
-	return url, nil
+	var (
+		scheme = "https"
+		host   = fmt.Sprintf("%s.gallery.vsassets.io", ext.Publisher.PublisherName)
+		path   = fmt.Sprintf("/_apis/public/gallery/publisher/%s/extension/%s/%s/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage", ext.Publisher.PublisherName, "go", version)
+	)
+	return fmt.Sprintf("%s://%s%s", scheme, host, path)
+}
+
+func (ext *Extension) LatestVersion() string {
+	return ext.Versions[0].Version
 }
