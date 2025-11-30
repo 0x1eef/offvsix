@@ -44,7 +44,6 @@ func (ext *Extension) DownloadURL(version string) string {
 		host   = fmt.Sprintf("%s.gallery.vsassets.io", ext.Publisher.PublisherName)
 		path   = fmt.Sprintf("/_apis/public/gallery/publisher/%s/extension/%s/%s/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage", ext.Publisher.PublisherName, ext.ExtensionName, version)
 	)
-
 	return fmt.Sprintf("%s://%s%s", scheme, host, path)
 }
 

@@ -16,18 +16,22 @@ var version string
 func main() {
 	args := flag.Args()
 	extid := args[0]
+	fmt.Printf("offvsix: Find extension %q\n", extid)
 	ext, err := gallery.FindExtension(extid)
 	check(err)
 	if version == "" {
 		version = ext.LatestVersion()
 	}
+	fmt.Printf("offvsix: Download version %q\n", version)
 	r, err := asset.DownloadExtension(ext, version)
 	check(err)
 	b, err := io.ReadAll(r)
 	check(err)
+	fmt.Printf("offvsix: Save extension to disk\n")
 	file := fmt.Sprintf("%s-%s.vsix", extid, version)
 	err = os.WriteFile(file, b, 0644)
 	check(err)
+	fmt.Printf("offvsix: Extension saved to %q\n", file)
 }
 
 func showHelp() {
@@ -37,7 +41,8 @@ func showHelp() {
 
 func check(err error) {
 	if err != nil {
-		panic(err)
+		fmt.Fprintf(os.Stderr, "offvsix: %v\n", err)
+		os.Exit(1)
 	}
 }
 

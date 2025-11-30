@@ -10,7 +10,6 @@ import (
 
 func DownloadExtension(ext *gallery.Extension, version string) (io.Reader, error) {
 	endpoint := ext.DownloadURL(version)
-	fmt.Println(endpoint)
 	res, err := http.Get(endpoint)
 	if err != nil {
 		return nil, err
