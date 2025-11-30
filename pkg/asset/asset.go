@@ -20,6 +20,3 @@ func DownloadExtension(ext *gallery.Extension, version string) (io.Reader, error
 	return res.Body, nil
 }
 
-func SaveExtension(ext *gallery.Extension, r io.Reader) error {
-	return fmt.Errorf("not implemented")
-}
