@@ -94,9 +94,9 @@ func check(err error) {
 }
 
 func init() {
-	flag.BoolVar(&help, "h", false, "Show help")
 	flag.StringVar(&version, "v", "", "Set extension version")
 	flag.StringVar(&file, "f", "", "Path to a text file with extensions to download, one per line")
+	flag.BoolVar(&help, "h", false, "Show help")
 	flag.Parse()
 	if file == "" && len(flag.Args()) != 1 {
 		showHelp()
