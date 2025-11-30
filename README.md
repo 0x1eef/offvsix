@@ -19,7 +19,7 @@ You can install the binary using `go install`:
 
 ```bash
 go install github.com/0x1eef/offvsix/cmd/offvsix@latest
-~/go/bin/offvsix ms-python.python
+~/go/bin/offvsix golang.go
 ```
 
 Or build from source:
@@ -28,7 +28,7 @@ Or build from source:
 git clone https://github.com/0x1eef/offvsix.git
 cd offvsix
 make build
-./bin/offvsix ms-python.python
+./bin/offvsix golang.go
 ```
 
 ## Usage
@@ -42,7 +42,7 @@ offvsix <publisher.extension>
 For example:
 
 ```bash
-offvsix ms-python.python
+offvsix golang.go
 ```
 
 ### Bulk
