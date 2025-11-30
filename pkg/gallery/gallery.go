@@ -40,9 +40,12 @@ func (ext *Extension) DownloadURL(version string) string {
 		version = ext.LatestVersion()
 	}
 	var (
-		scheme = "https"
-		host   = fmt.Sprintf("%s.gallery.vsassets.io", ext.Publisher.PublisherName)
-		path   = fmt.Sprintf("/_apis/public/gallery/publisher/%s/extension/%s/%s/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage", ext.Publisher.PublisherName, ext.ExtensionName, version)
+		pubName = ext.Publisher.PublisherName
+		extName = ext.ExtensionName
+		scheme  = "https"
+		host    = fmt.Sprintf("%s.gallery.vsassets.io", pubName)
+		kind    = "Microsoft.VisualStudio.Services.VSIXPackage"
+		path    = fmt.Sprintf("/_apis/public/gallery/publisher/%s/extension/%s/%s/assetbyname/%s", pubName, extName, version, kind)
 	)
 	return fmt.Sprintf("%s://%s%s", scheme, host, path)
 }
