@@ -5,18 +5,25 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 
 	"github.com/0x1eef/offvsix/pkg/gallery"
 )
 
 var help bool
 var version string
+var file string
 
 func main() {
 	args := flag.Args()
-	extid := args[0]
-	err := save(extid)
-	check(err)
+	if file == "" {
+		extid := args[0]
+		err := save(extid)
+		check(err)
+	} else {
+		err := saveAll(file)
+		check(err)
+	}
 }
 
 func save(extid string) error {
@@ -47,6 +54,31 @@ func save(extid string) error {
 	return nil
 }
 
+func saveAll(file string) error {
+	f, err := os.Open(file)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	buf, err := io.ReadAll(f)
+	if err != nil {
+		return err
+	}
+	for _, line := range strings.Split(string(buf), "\n") {
+		extid := strings.TrimSpace(line)
+		if extid == "" {
+			continue
+		}
+		err := save(extid)
+		if err != nil {
+			return err
+		} else {
+			version = ""
+		}
+	}
+	return nil
+}
+
 func showHelp() {
 	fmt.Println("Usage: offvsix [options] extension")
 	flag.PrintDefaults()
@@ -62,8 +94,9 @@ func check(err error) {
 func init() {
 	flag.BoolVar(&help, "h", false, "Show help")
 	flag.StringVar(&version, "v", "", "Set extension version")
+	flag.StringVar(&file, "f", "", "Path to a text file with extensions to download, one per line")
 	flag.Parse()
-	if len(flag.Args()) != 1 {
+	if file == "" && len(flag.Args()) != 1 {
 		showHelp()
 		os.Exit(1)
 	} else if help {
