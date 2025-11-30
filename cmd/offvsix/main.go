@@ -6,7 +6,6 @@ import (
 	"io"
 	"os"
 
-	"github.com/0x1eef/offvsix/pkg/asset"
 	"github.com/0x1eef/offvsix/pkg/gallery"
 )
 
@@ -30,7 +29,7 @@ func save(extid string) error {
 		version = ext.LatestVersion()
 	}
 	fmt.Printf("offvsix: download version %q\n", version)
-	r, err := asset.DownloadExtension(ext, version)
+	r, err := gallery.DownloadExtension(ext, version)
 	if err != nil {
 		return err
 	}
@@ -45,6 +44,7 @@ func save(extid string) error {
 		return err
 	}
 	fmt.Printf("offvsix: extension saved to %q\n", file)
+	return nil
 }
 
 func showHelp() {
