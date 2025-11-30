@@ -10,9 +10,11 @@ import (
 	"github.com/0x1eef/offvsix/pkg/gallery"
 )
 
-var help bool
-var version string
-var file string
+var (
+	help    bool
+	version string
+	file    string
+)
 
 func main() {
 	args := flag.Args()
