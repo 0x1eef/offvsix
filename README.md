@@ -17,11 +17,12 @@ of the same name but this copy is rewritten in Go.
 
 #### Binaries
 
-Prebuilt binaries are made available via [GItHub actions](https://github.com/0x1eef/offvsix/actions/runs/19804438532):
+Prebuilt binaries are made available via [GItHub actions](https://github.com/0x1eef/offvsix/actions/runs/19806477120):
 
-* [offvsix-windows-amd64 (v0.1.0)](https://github.com/0x1eef/offvsix/actions/runs/19804438532/artifacts/4718381404)
-* [offvsix-linux-amd64 (v0.1.0)](https://github.com/0x1eef/offvsix/actions/runs/19804438532/artifacts/4718379153)
-* [offvsix-darwin-amd64 (v0.1.0)](https://github.com/0x1eef/offvsix/actions/runs/19804438532/artifacts/4718379288)
+* [offvsix-windows-amd64 (v0.2.0)](https://github.com/0x1eef/offvsix/actions/runs/19806477120/artifacts/4718983018)
+* [offvsix-linux-amd64 (v0.2.0)](https://github.com/0x1eef/offvsix/actions/runs/19806477120/artifacts/4718980945)
+* [offvsix-darwin-amd64 (v0.2.0)](https://github.com/0x1eef/offvsix/actions/runs/19806477120/artifacts/4718980702)
+* [offvsix-freebsd-amd64 (v0.2.0)](https://github.com/0x1eef/offvsix/actions/runs/19806477120/artifacts/4718985996)
 
 #### Package
 
