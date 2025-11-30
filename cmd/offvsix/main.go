@@ -16,22 +16,22 @@ var version string
 func main() {
 	args := flag.Args()
 	extid := args[0]
-	fmt.Printf("offvsix: Find extension %q\n", extid)
+	fmt.Printf("offvsix: find extension %q\n", extid)
 	ext, err := gallery.FindExtension(extid)
 	check(err)
 	if version == "" {
 		version = ext.LatestVersion()
 	}
-	fmt.Printf("offvsix: Download version %q\n", version)
+	fmt.Printf("offvsix: download version %q\n", version)
 	r, err := asset.DownloadExtension(ext, version)
 	check(err)
 	b, err := io.ReadAll(r)
 	check(err)
-	fmt.Printf("offvsix: Save extension to disk\n")
+	fmt.Printf("offvsix: save extension to disk\n")
 	file := fmt.Sprintf("%s-%s.vsix", extid, version)
 	err = os.WriteFile(file, b, 0644)
 	check(err)
-	fmt.Printf("offvsix: Extension saved to %q\n", file)
+	fmt.Printf("offvsix: extension saved to %q\n", file)
 }
 
 func showHelp() {
@@ -50,7 +50,6 @@ func init() {
 	flag.BoolVar(&help, "h", false, "Show help")
 	flag.StringVar(&version, "v", "", "Set extension version")
 	flag.Parse()
-
 	if len(flag.Args()) != 1 {
 		showHelp()
 		os.Exit(1)
