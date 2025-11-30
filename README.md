@@ -13,6 +13,24 @@ of the same name but this copy is rewritten in Go.
 * Cross-platform support: Windows, macOS, Linux, and BSD
 * **Bulk download:** Supply a text file with a list of extensions to download them all at once!
 
+## Installation
+
+You can install the binary using `go install`:
+
+```bash
+go install github.com/0x1eef/offvsix/cmd/offvsix@latest
+~/go/bin/offvsix ms-python.python
+```
+
+Or build from source:
+
+```bash
+git clone https://github.com/0x1eef/offvsix.git
+cd offvsix
+make build
+./bin/offvsix ms-python.python
+```
+
 ## Usage
 
 ### Basics
