@@ -13,6 +13,34 @@ of the same name but this copy is rewritten in Go.
 * Cross-platform support: Windows, macOS, Linux, and BSD
 * **Bulk download:** Supply a text file with a list of extensions to download them all at once!
 
+## Usage
+
+### Basics
+
+```bash
+offvsix <publisher.extension>
+```
+
+For example:
+
+```bash
+offvsix ms-python.python
+```
+
+### Bulk
+
+To download multiple extensions, you can use a text file where each line is an extension name:
+
+```bash
+offvsix --file extensions.txt
+```
+
+### Install
+
+```bash
+code-server --install-extension golang.go-0.51.1.vsix
+```
+
 ## License
 
 [BSD Zero Clause](https://choosealicense.com/licenses/0bsd/)
