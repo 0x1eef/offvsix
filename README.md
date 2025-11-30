@@ -9,55 +9,39 @@ of the same name but this copy is rewritten in Go.
 ## Features
 
 * Download specific versions of VS Code extensions
+* **Bulk download:** Supply a text file with a list of extensions to download them all at once
 * Single binary with no dependencies
 * Cross-platform support: Windows, macOS, Linux, and BSD
-* **Bulk download:** Supply a text file with a list of extensions to download them all at once!
 
 ## Install
 
-You can install the binary using `go install`:
-
-```bash
-go install github.com/0x1eef/offvsix/cmd/offvsix@latest
-~/go/bin/offvsix golang.go
-```
-
-Or build from source:
-
-```bash
-git clone https://github.com/0x1eef/offvsix.git
-cd offvsix
-make build
-./bin/offvsix golang.go
-```
+    user@localhost$ go install github.com/0x1eef/offvsix/cmd/offvsix@latest
+    user@localhost$ ~/go/bin/offvsix golang.go
 
 ## Usage
 
 #### Basics
 
-```bash
-offvsix <publisher.extension>
-```
+The following examples demonstrate how to download individual
+extensions, and by a specific version:
 
-For example:
-
-```bash
-offvsix golang.go
-```
+    user@localhost$ offvsix <publisher.extension>
+    user@localhost$ offvsix golang.go
+    user@localhost$ offvsix -v 0.50.0 golang.go
 
 #### Bulk
 
-To download multiple extensions, you can use a text file where each line is an extension name:
+The following example assumes extensions.txt contains a list of
+extensions, with one extension per line:
 
-```bash
-offvsix -f extensions.txt
-```
+    user@localhost$ offvsix -f extensions.txt
 
 #### Install
 
-```bash
-code-server --install-extension golang.go-0.51.1.vsix
-```
+The following example demonstrates how to install an extension
+with [code-server](https://github.com/coder/code-server):
+
+    user@localhost$ code-server --install-extension golang.go-0.51.1.vsix
 
 ## License
 
