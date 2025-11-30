@@ -46,8 +46,8 @@ jobs:
         with:
           release: '15.0'
           run: |
-            pkg install -y go make
-            cd /github/workspace
+            pkg install -y go
+            cd ${GITHUB_WORKSPACE}
             GOOS=freebsd GOARCH=amd64 make release
       - name: Upload FreeBSD Artifact
         uses: actions/upload-artifact@v4
