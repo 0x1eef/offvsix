@@ -11,6 +11,7 @@ of the same name but this copy is rewritten in Go.
 * Download specific versions of VS Code extensions
 * Single binary with no dependencies
 * Cross-platform support: Windows, macOS, Linux, and BSD
+* **Bulk download:** Supply a text file with a list of extensions to download them all at once!
 
 ## License
 
