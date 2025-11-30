@@ -36,3 +36,24 @@ jobs:
         with:
           name: offvsix-${{ matrix.goos }}-${{ matrix.goarch }}
           path: ./bin/offvsix
+
+  freebsd-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up FreeBSD VM
+        uses: vmactions/freebsd-vm@v1
+        with:
+          release: '15.0'
+          env:
+            GOOS: freebsd
+            GOARCH: amd64
+          run: |
+            pkg install -y go make
+            cd /github/workspace
+            make release
+      - name: Upload FreeBSD Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: offvsix-freebsd-amd64
+          path: bin/offvsix
