@@ -15,8 +15,17 @@ of the same name but this copy is rewritten in Go.
 
 ## Install
 
+#### Package
+
     user@localhost$ go install github.com/0x1eef/offvsix/cmd/offvsix@latest
     user@localhost$ ~/go/bin/offvsix golang.go
+
+#### Source
+
+    user@localhost$ git clone https://github.com/0x1eef/offvsix.git
+    user@localhost$ cd offvsix
+    user@localhost$ make build
+    user@localhost$ ./bin/offvsix golang.go
 
 ## Usage
 
