@@ -12,6 +12,7 @@ but this copy is written in Go.
 * Cross-platform support: Windows, macOS, Linux, and BSD
 * Download specific versions of VS Code extensions
 * Supply a text file with a list of extensions to download them all at once
+* Avoid redundant downloads when an extension already exists on disk
 
 ## Install
 

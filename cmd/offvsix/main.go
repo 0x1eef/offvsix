@@ -39,6 +39,12 @@ func save(extid string, version string) error {
 	if version == "" {
 		version = ext.LatestVersion()
 	}
+	p := fmt.Sprintf("%s-%s.vsix", extid, version)
+	_, err = os.Stat(p)
+	if err == nil {
+		fmt.Printf("offvsix: extension %q already exists on disk, skip download\n", p)
+		return nil
+	}
 	fmt.Printf("offvsix: download version %q\n", version)
 	r, err := gallery.DownloadExtension(ext, version)
 	if err != nil {
@@ -50,7 +56,6 @@ func save(extid string, version string) error {
 		return err
 	}
 	fmt.Printf("offvsix: save extension to disk\n")
-	p := fmt.Sprintf("%s-%s.vsix", extid, version)
 	err = os.WriteFile(p, b, 0644)
 	if err != nil {
 		return err
