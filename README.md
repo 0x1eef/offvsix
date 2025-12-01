@@ -2,9 +2,9 @@
 
 offvsix is a command-line utility written in Go that can
 download Visual Studio Code extensions (.vsix files) directly
-from the Visual Studio Marketplace. This project is inspired by
-the Python-based [@gni/offvsix](https://github.com/gni/offvsix) tool
-of the same name but this copy is written in Go.
+from the Visual Studio Marketplace. This project is a port of
+the Python-based [@gni/offvsix](https://github.com/gni/offvsix)
+but this copy is written in Go.
 
 ## Features
 
