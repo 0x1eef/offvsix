@@ -17,13 +17,16 @@ var (
 )
 
 func main() {
+	var err error
 	args := flag.Args()
 	if file == "" {
-		err := save(args[0], version)
-		check(err)
+		err = save(args[0], version)
 	} else {
-		err := saveAll(file, version)
-		check(err)
+		err = saveAll(file, version)
+	}
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "offvsix: %v\n", err)
+		os.Exit(1)
 	}
 }
 
@@ -82,13 +85,6 @@ func saveAll(file string, version string) error {
 func showHelp() {
 	fmt.Println("Usage: offvsix [options] extension")
 	flag.PrintDefaults()
-}
-
-func check(err error) {
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "offvsix: %v\n", err)
-		os.Exit(1)
-	}
 }
 
 func init() {
