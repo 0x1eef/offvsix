@@ -19,15 +19,15 @@ var (
 func main() {
 	args := flag.Args()
 	if file == "" {
-		err := save(args[0])
+		err := save(args[0], version)
 		check(err)
 	} else {
-		err := saveAll(file)
+		err := saveAll(file, version)
 		check(err)
 	}
 }
 
-func save(extid string) error {
+func save(extid string, version string) error {
 	fmt.Printf("offvsix: find extension %q\n", extid)
 	ext, err := gallery.FindExtension(extid)
 	if err != nil {
@@ -55,7 +55,7 @@ func save(extid string) error {
 	return nil
 }
 
-func saveAll(file string) error {
+func saveAll(file string, version string) error {
 	f, err := os.Open(file)
 	if err != nil {
 		return err
@@ -70,13 +70,12 @@ func saveAll(file string) error {
 		if extid == "" {
 			continue
 		}
-		err := save(extid)
+		err := save(extid, version)
 		if err != nil {
 			return err
-		} else {
-			version = ""
 		}
 	}
+
 	return nil
 }
 
