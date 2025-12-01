@@ -49,12 +49,12 @@ func save(extid string, version string) error {
 		return err
 	}
 	fmt.Printf("offvsix: save extension to disk\n")
-	file := fmt.Sprintf("%s-%s.vsix", extid, version)
-	err = os.WriteFile(file, b, 0644)
+	p := fmt.Sprintf("%s-%s.vsix", extid, version)
+	err = os.WriteFile(p, b, 0644)
 	if err != nil {
 		return err
 	}
-	fmt.Printf("offvsix: extension saved to %q\n", file)
+	fmt.Printf("offvsix: extension saved to %q\n", p)
 	return nil
 }
 
@@ -78,7 +78,6 @@ func saveAll(file string, version string) error {
 			return err
 		}
 	}
-
 	return nil
 }
 
@@ -93,7 +92,7 @@ func init() {
 	flag.BoolVar(&help, "h", false, "Show help")
 	flag.Parse()
 	if file == "" && len(flag.Args()) != 1 {
-		showHelp()
+		fmt.Fprintln(os.Stderr, "offvsix: please provide either an extension or a file containing extensions")
 		os.Exit(1)
 	} else if help {
 		showHelp()
