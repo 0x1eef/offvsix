@@ -19,8 +19,7 @@ var (
 func main() {
 	args := flag.Args()
 	if file == "" {
-		extid := args[0]
-		err := save(extid)
+		err := save(args[0])
 		check(err)
 	} else {
 		err := saveAll(file)
