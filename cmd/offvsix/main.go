@@ -44,6 +44,7 @@ func save(extid string, version string) error {
 	if err != nil {
 		return err
 	}
+	defer r.Close()
 	b, err := io.ReadAll(r)
 	if err != nil {
 		return err
