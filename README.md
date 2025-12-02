@@ -70,6 +70,12 @@ written by [@gni](https://github.com/gni). I studied the source code of
 to first understand how to implement the same functionality
 in Go, and their work made this project possible.
 
+## Sources
+
+* [github.com/@0x1eef](https://github.com/0x1eef/offvsix)
+* [gitlab.com/@0x1eef](https://gitlab.com/0x1eef/offvsix)
+* [hardenedbsd.org/@0x1eef](https://hardenedbsd.org/@0x1eef/offvsix)
+
 ## License
 
 [BSD Zero Clause](https://choosealicense.com/licenses/0bsd/)
