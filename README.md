@@ -27,10 +27,10 @@ but this copy is written in Go.
 
 Prebuilt binaries are made available via [GItHub actions](https://github.com/0x1eef/offvsix/actions/runs/19806477120):
 
-* [offvsix-windows-amd64 (v0.3.0)](https://github.com/0x1eef/offvsix/actions/runs/19985527264/artifacts/4784847066)
-* [offvsix-linux-amd64 (v0.3.0)](https://github.com/0x1eef/offvsix/actions/runs/19985527264/artifacts/4784846175)
-* [offvsix-darwin-amd64 (v0.3.0)](https://github.com/0x1eef/offvsix/actions/runs/19985527264/artifacts/4784846030)
-* [offvsix-freebsd-amd64 (v0.3.0)](https://github.com/0x1eef/offvsix/actions/runs/19985527264/artifacts/4784850204)
+* [offvsix-windows-amd64 (v0.3.1)](https://github.com/0x1eef/offvsix/actions/runs/19988405841/artifacts/4785577121)
+* [offvsix-linux-amd64 (v0.3.1)](https://github.com/0x1eef/offvsix/actions/runs/19988405841/artifacts/4785576212)
+* [offvsix-darwin-amd64 (v0.3.1)](https://github.com/0x1eef/offvsix/actions/runs/19988405841/artifacts/4785576014)
+* [offvsix-freebsd-amd64 (v0.3.1)](https://github.com/0x1eef/offvsix/actions/runs/19988405841/artifacts/4785581038)
 
 #### Package
 
