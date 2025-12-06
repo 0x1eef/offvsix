@@ -31,7 +31,7 @@ func main() {
 }
 
 func save(extid string, version string) error {
-	fmt.Printf("offvsix: find extension %q\n", extid)
+	say("find extension %q", extid)
 	ext, err := gallery.FindExtension(extid)
 	if err != nil {
 		return err
@@ -42,10 +42,10 @@ func save(extid string, version string) error {
 	p := fmt.Sprintf("%s-%s.vsix", extid, version)
 	_, err = os.Stat(p)
 	if err == nil {
-		fmt.Printf("offvsix: extension %q already exists on disk, skip download\n", p)
+		say("extension %q already exists on disk", p)
 		return nil
 	}
-	fmt.Printf("offvsix: download version %q\n", version)
+	say("download version %q", version)
 	r, err := gallery.DownloadExtension(ext, version)
 	if err != nil {
 		return err
@@ -55,12 +55,12 @@ func save(extid string, version string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("offvsix: save extension to disk\n")
+	say("save extension to disk")
 	err = os.WriteFile(p, b, 0644)
 	if err != nil {
 		return err
 	}
-	fmt.Printf("offvsix: extension saved to %q\n", p)
+	say("extension saved to %q", p)
 	return nil
 }
 
@@ -90,6 +90,11 @@ func saveAll(file string, version string) error {
 func showHelp() {
 	fmt.Println("Usage: offvsix [options] extension")
 	flag.PrintDefaults()
+}
+
+func say(m string, f ...any) {
+	msg := fmt.Sprintf("offvsix: %s", m)
+	fmt.Fprintf(os.Stdout, msg+"\n", f...)
 }
 
 func init() {
