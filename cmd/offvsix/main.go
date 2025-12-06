@@ -92,17 +92,19 @@ func saveAll(file string, version string) error {
 }
 
 func read(res io.ReadCloser, len int64) ([]byte, error) {
-	result := make([]byte, len)
+	buffer := make([]byte, 0, len)
+	chunk := make([]byte, 1024)
 	total := 0
 	width := 50
 	for {
-		n, err := res.Read(result)
+		n, err := res.Read(chunk)
 		total += n
 		if err == io.EOF || n == 0 {
 			break
 		} else if err != nil {
-			return result, err
+			return buffer, err
 		}
+		buffer = append(buffer, chunk[:n]...)
 		percent := float64(total) / float64(len)
 		arrows := int(percent * float64(width))
 		fmt.Printf(
@@ -112,7 +114,7 @@ func read(res io.ReadCloser, len int64) ([]byte, error) {
 			int(percent*100),
 		)
 	}
-	return result, nil
+	return buffer, nil
 }
 
 func showHelp() {
