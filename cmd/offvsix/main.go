@@ -87,6 +87,7 @@ func read(res io.ReadCloser, len int64) ([]byte, error) {
 	}
 	return result, nil
 }
+
 func saveAll(file string, version string) error {
 	f, err := os.Open(file)
 	if err != nil {
