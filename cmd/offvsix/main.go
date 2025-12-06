@@ -46,15 +46,16 @@ func save(extid string, version string) error {
 		return nil
 	}
 	say("download version %q", version)
-	r, err := gallery.DownloadExtension(ext, version)
+	r, l, err := gallery.DownloadExtension(ext, version)
 	if err != nil {
 		return err
 	}
 	defer r.Close()
-	b, err := io.ReadAll(r)
+	b, err := read(r, l)
 	if err != nil {
 		return err
 	}
+	fmt.Println()
 	say("save extension to disk")
 	err = os.WriteFile(p, b, 0644)
 	if err != nil {
@@ -62,6 +63,22 @@ func save(extid string, version string) error {
 	}
 	say("extension saved to %q", p)
 	return nil
+}
+
+func read(res io.ReadCloser, len int64) ([]byte, error) {
+	b := make([]byte, len)
+	t := 0
+	for {
+		n, err := res.Read(b)
+		t += n
+		if err == io.EOF || n == 0 {
+			break
+		} else if err != nil {
+			return b, err
+		}
+		fmt.Printf("\033[0K\roffvsix: %d/%d bytes", t, len)
+	}
+	return b, nil
 }
 
 func saveAll(file string, version string) error {

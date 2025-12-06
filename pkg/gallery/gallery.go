@@ -35,16 +35,16 @@ func FindExtension(extensionID string) (*Extension, error) {
 	return &ver.Results[0].Extensions[0], nil
 }
 
-func DownloadExtension(ext *Extension, version string) (io.ReadCloser, error) {
+func DownloadExtension(ext *Extension, version string) (io.ReadCloser, int64, error) {
 	endpoint := ext.DownloadURL(version)
 	res, err := http.Get(endpoint)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	if res.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("download failure: %s", res.Status)
+		return nil, 0, fmt.Errorf("download failure: %s", res.Status)
 	}
-	return res.Body, nil
+	return res.Body, res.ContentLength, nil
 }
 
 func (ext *Extension) DownloadURL(version string) string {
