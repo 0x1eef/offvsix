@@ -6,6 +6,13 @@ from the Visual Studio Marketplace. This project is a port of
 the Python-based [@gni/offvsix](https://github.com/gni/offvsix)
 but this copy is written in Go.
 
+## Demo
+
+<details>
+    <summary>Play demo</summary>
+    <img src="demo.gif" alt="demo" />
+</details>
+
 ## Features
 
 * Single binary with no dependencies
