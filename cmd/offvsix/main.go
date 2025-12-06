@@ -11,18 +11,18 @@ import (
 )
 
 var (
-	help    bool
-	version string
-	file    string
+	help       bool
+	pkgVersion string
+	file       string
 )
 
 func main() {
 	var err error
 	args := flag.Args()
 	if file == "" {
-		err = save(args[0], version)
+		err = save(args[0], pkgVersion)
 	} else {
-		err = saveAll(file, version)
+		err = saveAll(file, pkgVersion)
 	}
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "offvsix: %v\n", err)
@@ -126,12 +126,12 @@ func say(m string, f ...any) {
 }
 
 func init() {
-	flag.StringVar(&version, "v", "", "Set extension version")
+	flag.StringVar(&pkgVersion, "v", "", "Set extension version")
 	flag.StringVar(&file, "f", "", "Path to a text file with extensions to download, one per line")
 	flag.BoolVar(&help, "h", false, "Show help")
 	flag.Parse()
 	if file == "" && len(flag.Args()) != 1 {
-		fmt.Fprintln(os.Stderr, "offvsix: please provide either an extension or a file containing extensions")
+		fmt.Fprintln(os.Stderr, "offvsix: provide either an extension or a file containing extensions")
 		os.Exit(1)
 	} else if help {
 		showHelp()
