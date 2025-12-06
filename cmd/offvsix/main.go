@@ -56,31 +56,37 @@ func save(extid string, version string) error {
 		return err
 	}
 	fmt.Println()
-	say("save extension to disk")
 	err = os.WriteFile(p, b, 0644)
 	if err != nil {
 		return err
 	}
-	say("extension saved to %q", p)
+	say("save %q", p)
 	return nil
 }
 
 func read(res io.ReadCloser, len int64) ([]byte, error) {
-	b := make([]byte, len)
-	t := 0
+	result := make([]byte, len)
+	total := 0
+	width := 50
 	for {
-		n, err := res.Read(b)
-		t += n
+		n, err := res.Read(result)
+		total += n
 		if err == io.EOF || n == 0 {
 			break
 		} else if err != nil {
-			return b, err
+			return result, err
 		}
-		fmt.Printf("\033[0K\roffvsix: %d/%d bytes", t, len)
+		percent := float64(total) / float64(len)
+		arrows := int(percent * float64(width))
+		fmt.Printf(
+			"\033[0K\roffvsix: [%s>%s] %d%%",
+			strings.Repeat("=", arrows),
+			strings.Repeat(" ", width-arrows),
+			int(percent*100),
+		)
 	}
-	return b, nil
+	return result, nil
 }
-
 func saveAll(file string, version string) error {
 	f, err := os.Open(file)
 	if err != nil {
