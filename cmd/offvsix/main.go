@@ -39,28 +39,28 @@ func save(extid string, version string) error {
 	if version == "" {
 		version = ext.LatestVersion()
 	}
-	p := fmt.Sprintf("%s-%s.vsix", extid, version)
-	_, err = os.Stat(p)
+	pkg := fmt.Sprintf("%s-%s.vsix", extid, version)
+	_, err = os.Stat(pkg)
 	if err == nil {
-		say("extension %q already exists on disk", p)
+		say("extension %q already exists on disk", pkg)
 		return nil
 	}
 	say("download version %q", version)
-	r, l, err := gallery.DownloadExtension(ext, version)
+	body, length, err := gallery.DownloadExtension(ext, version)
 	if err != nil {
 		return err
 	}
-	defer r.Close()
-	b, err := read(r, l)
+	defer body.Close()
+	result, err := read(body, length)
 	if err != nil {
 		return err
 	}
 	fmt.Println()
-	err = os.WriteFile(p, b, 0644)
+	err = os.WriteFile(pkg, result, 0644)
 	if err != nil {
 		return err
 	}
-	say("save %q", p)
+	say("save %q", pkg)
 	return nil
 }
 
