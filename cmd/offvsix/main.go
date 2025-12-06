@@ -64,6 +64,33 @@ func save(extid string, version string) error {
 	return nil
 }
 
+func saveAll(file string, version string) error {
+	f, err := os.Open(file)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	buf, err := io.ReadAll(f)
+	if err != nil {
+		return err
+	}
+	lines := strings.Split(string(buf), "\n")
+	for index, line := range lines {
+		extid := strings.TrimSpace(line)
+		if index > 0 && index < len(lines)-1 {
+			fmt.Println()
+		}
+		if extid == "" {
+			continue
+		}
+		err := save(extid, version)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func read(res io.ReadCloser, len int64) ([]byte, error) {
 	result := make([]byte, len)
 	total := 0
@@ -86,29 +113,6 @@ func read(res io.ReadCloser, len int64) ([]byte, error) {
 		)
 	}
 	return result, nil
-}
-
-func saveAll(file string, version string) error {
-	f, err := os.Open(file)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-	buf, err := io.ReadAll(f)
-	if err != nil {
-		return err
-	}
-	for _, line := range strings.Split(string(buf), "\n") {
-		extid := strings.TrimSpace(line)
-		if extid == "" {
-			continue
-		}
-		err := save(extid, version)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
 }
 
 func showHelp() {
