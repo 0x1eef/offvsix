@@ -2,6 +2,7 @@ package gallery
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -15,7 +16,7 @@ var (
 	}
 )
 
-func newRequest(extensionID string) (*http.Request, error) {
+func newRequest(ctx context.Context, extensionID string) (*http.Request, error) {
 	var (
 		scheme   = "https"
 		host     = "marketplace.visualstudio.com"
@@ -29,6 +30,9 @@ func newRequest(extensionID string) (*http.Request, error) {
 	req, err := http.NewRequest("POST", endpoint, body)
 	if err != nil {
 		return nil, err
+	}
+	if ctx != nil {
+		req = req.WithContext(ctx)
 	}
 	for k, v := range headers {
 		req.Header.Set(k, v)

@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"io"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/0x1eef/offvsix/pkg/gallery"
 )
@@ -31,8 +33,10 @@ func main() {
 }
 
 func save(extid string, version string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
+	defer cancel()
 	say("find extension %q", extid)
-	ext, err := gallery.FindExtension(extid)
+	ext, err := gallery.FindExtension(ctx, extid)
 	if err != nil {
 		return err
 	}
@@ -46,7 +50,7 @@ func save(extid string, version string) error {
 		return nil
 	}
 	say("download version %q", version)
-	body, length, err := gallery.DownloadExtension(ext, version)
+	body, length, err := gallery.DownloadExtension(context.TODO(), ext, version)
 	if err != nil {
 		return err
 	}

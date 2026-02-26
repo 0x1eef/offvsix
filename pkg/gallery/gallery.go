@@ -1,15 +1,16 @@
 package gallery
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 )
 
-func FindExtension(extensionID string) (*Extension, error) {
+func FindExtension(ctx context.Context, extensionID string) (*Extension, error) {
 	var ver Response
-	req, err := newRequest(extensionID)
+	req, err := newRequest(ctx, extensionID)
 	if err != nil {
 		return nil, err
 	}
@@ -35,9 +36,16 @@ func FindExtension(extensionID string) (*Extension, error) {
 	return &ver.Results[0].Extensions[0], nil
 }
 
-func DownloadExtension(ext *Extension, version string) (io.ReadCloser, int64, error) {
+func DownloadExtension(ctx context.Context, ext *Extension, version string) (io.ReadCloser, int64, error) {
 	endpoint := ext.DownloadURL(version)
-	res, err := http.Get(endpoint)
+	req, err := http.NewRequest("GET", endpoint, nil)
+	if err != nil {
+		return nil, 0, err
+	}
+	if ctx != nil {
+		req = req.WithContext(ctx)
+	}
+	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, 0, err
 	}
