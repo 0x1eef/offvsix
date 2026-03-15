@@ -25,12 +25,12 @@ but this copy is written in Go.
 
 #### Binaries
 
-Prebuilt binaries are made available via [GItHub actions](https://github.com/0x1eef/offvsix/actions/runs/19806477120):
+Prebuilt binaries are published as GitHub release assets:
 
-* [offvsix-windows-amd64 (v0.3.1)](https://github.com/0x1eef/offvsix/actions/runs/19988405841/artifacts/4785577121)
-* [offvsix-linux-amd64 (v0.3.1)](https://github.com/0x1eef/offvsix/actions/runs/19988405841/artifacts/4785576212)
-* [offvsix-darwin-amd64 (v0.3.1)](https://github.com/0x1eef/offvsix/actions/runs/19988405841/artifacts/4785576014)
-* [offvsix-freebsd-amd64 (v0.3.1)](https://github.com/0x1eef/offvsix/actions/runs/19988405841/artifacts/4785581038)
+* [offvsix-windows-amd64.exe (latest)](https://github.com/0x1eef/offvsix/releases/latest/download/offvsix-windows-amd64.exe)
+* [offvsix-linux-amd64 (latest)](https://github.com/0x1eef/offvsix/releases/latest/download/offvsix-linux-amd64)
+* [offvsix-darwin-amd64 (latest)](https://github.com/0x1eef/offvsix/releases/latest/download/offvsix-darwin-amd64)
+* [offvsix-freebsd-amd64 (latest)](https://github.com/0x1eef/offvsix/releases/latest/download/offvsix-freebsd-amd64)
 
 #### Package
 

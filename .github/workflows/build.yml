@@ -5,20 +5,35 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+
   build:
+    needs: release
     strategy:
       matrix:
         include:
           - os: ubuntu-latest
             goos: linux
             goarch: amd64
+            asset_ext: ""
           - os: windows-latest
             goos: windows
             goarch: amd64
+            asset_ext: ".exe"
           - os: macos-latest
             goos: darwin
             goarch: amd64
+            asset_ext: ""
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -31,13 +46,16 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: make release
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+      - name: Rename release asset
+        shell: bash
+        run: mv ./bin/offvsix ./bin/offvsix-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.asset_ext }}
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
         with:
-          name: offvsix-${{ matrix.goos }}-${{ matrix.goarch }}
-          path: ./bin/offvsix
+          files: ./bin/offvsix-${{ matrix.goos }}-${{ matrix.goarch }}${{ matrix.asset_ext }}
 
   freebsd-build:
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -49,8 +67,9 @@ jobs:
             pkg install -y go
             cd ${GITHUB_WORKSPACE}
             GOOS=freebsd GOARCH=amd64 make release
-      - name: Upload FreeBSD Artifact
-        uses: actions/upload-artifact@v4
+      - name: Rename FreeBSD release asset
+        run: mv bin/offvsix bin/offvsix-freebsd-amd64
+      - name: Upload FreeBSD Release Asset
+        uses: softprops/action-gh-release@v2
         with:
-          name: offvsix-freebsd-amd64
-          path: bin/offvsix
+          files: bin/offvsix-freebsd-amd64
